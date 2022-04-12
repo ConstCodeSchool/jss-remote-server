@@ -1,5 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
+import multer from "multer";
+import { resolve } from "path";
+
+const __dirname = resolve();
+const upload = multer({ dest: resolve(__dirname, "./uploads") });
 
 const router = express.Router();
 
@@ -29,7 +34,7 @@ router.get("/users/:id", (req, res) => {
 	res.json(user).end();
 });
 
-router.post("/users", bodyParser.json(), (req, res) => {
+router.post("/users", bodyParser.json(), upload.none(), (req, res) => {
 	const { name, age } = req.body;
 
 	if (users.some((user) => user.name === name)) {
