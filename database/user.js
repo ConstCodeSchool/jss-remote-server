@@ -34,6 +34,10 @@ router.get("/users/:id", (req, res) => {
 	res.json(user).end();
 });
 
+router.get("/usersCount", (req, res) => {
+	res.json({ count: users.length }).end();
+});
+
 router.post("/users", bodyParser.json(), upload.none(), (req, res) => {
 	const { name, age } = req.body;
 
